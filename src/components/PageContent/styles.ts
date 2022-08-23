@@ -5,7 +5,6 @@ interface StatusTaskProps {
   $color: string;
 }
 
-
 export const Container = styled.div`
   margin: 0 auto;
   margin-top: ${convertPixelToRem(-35)};
@@ -105,11 +104,8 @@ export const Line = styled.hr`
 `;
 
 export const TasksList = styled.div`
-  display: flex;
-  justify-content: center;
+  display: block;
   margin-top: ${convertPixelToRem(90)};
-
-  /* background-color: wheat; */
 `;
 
 export const NoHaveTasks = styled.div`
