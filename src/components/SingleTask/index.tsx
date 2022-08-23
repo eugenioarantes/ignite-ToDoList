@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Checkbox, ContentLabel, DeleteButton, IconTrash, ProjectCard, ProjectContainer, VerifyIcon } from "./styles";
 
 interface SingleTaskProps {
-  // children?: never;
   task: string;
   onDeleteTask: (task: string, checked: boolean) => void;
   onSumCompletedTasks: (isToSum: boolean) => void;
