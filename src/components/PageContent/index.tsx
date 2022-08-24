@@ -32,11 +32,9 @@ const PageContent: React.FC = () => {
       isAble: false,
     };
 
-    // setNewTask(createdTask);
-
     setTaskList([...taskList, createdTask]);
 
-    // setNewTask({} as Task);
+    setNewTask('');
   };
 
   function deleteTask (idOfTaskToDelete: string, ischecked: boolean) {
