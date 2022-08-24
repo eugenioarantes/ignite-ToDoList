@@ -3,27 +3,45 @@ import { useState } from "react";
 import { Container, CreateTaskButton, CreateTaskContainer, Line, NoHaveTasks, StatusTask, TaskInformations, TaskNumberInformation, TasksList } from "./styles";
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import SingleTask from "../SingleTask";
+import Paginator from "../Paginator";
+import { Task } from "../../types/Task";
+import { uuid } from "uuidv4";
 
 const PageContent: React.FC = () => {
 
-  const [taskList, setTaskList] = useState<string[]>([]);
+  const [taskList, setTaskList] = useState<Task[]>([]);
+
+  // const [word, setWord] = useState('');
 
   const [newTask, setNewTask] = useState('');
 
   const [completedTasks, setCompletedTasks] = useState(0);
+
+  const [page, setPage] = useState(1);
+
+  const taskListSize = taskList.length;
 
   const handleChangeTask = (word: string) => {
     setNewTask(word);
   };
 
   const handleCreateTask = () => {
-    setTaskList([...taskList, newTask]);
-    setNewTask('');
+    const createdTask = {
+      id: uuid(),
+      content: newTask,
+      isAble: false,
+    };
+
+    // setNewTask(createdTask);
+
+    setTaskList([...taskList, createdTask]);
+
+    // setNewTask({} as Task);
   };
 
-  function deleteTask (taskToDelete: string, ischecked: boolean) {
+  function deleteTask (idOfTaskToDelete: string, ischecked: boolean) {
     const tasksWithoutDeletedOne = taskList.filter(task => {
-      return task !== taskToDelete;
+      return task.id !== idOfTaskToDelete;
     });
 
     setTaskList(tasksWithoutDeletedOne);
@@ -56,24 +74,24 @@ const PageContent: React.FC = () => {
       <TaskInformations>
         <StatusTask $color="#4EA8DE">
           <span> Tarefas criadas </span>
-          <TaskNumberInformation> { taskList.length } </TaskNumberInformation>
+          <TaskNumberInformation> { taskListSize } </TaskNumberInformation>
         </StatusTask>
 
         <StatusTask $color="#8284FA">
           <span> Concluídas </span>
 
-          { taskList.length === 0 
+          { taskListSize === 0 
             ? <TaskNumberInformation> 0 </TaskNumberInformation>
 
             : <TaskNumberInformation>
-                { completedTasks } de { taskList.length }
+                { completedTasks } de { taskListSize }
                </TaskNumberInformation>
           }
         </StatusTask>
       </TaskInformations>
 
       {taskList.length === 0   
-        ? 
+        ? ( 
         <>
           <Line />
 
@@ -85,21 +103,31 @@ const PageContent: React.FC = () => {
             </NoHaveTasks>
           </TasksList>
         </>
-        :
-         <TasksList>{
-          taskList.map(task => {
-            return (
-              <SingleTask
-                key={task}
-                task={task}
-                onDeleteTask={deleteTask}
-                onSumCompletedTasks={sumCompletedTasks}
-              />
-            )
-          })
-          }
-         </TasksList>
-      }
+        )
+        : (
+        <TasksList>
+          <Paginator
+            totalCountOfRegisters={taskList.length}
+            registersPerPage={3}
+            currentPage={page}
+            onPageChange={setPage}
+            items={taskList}
+          >
+            {(displayRegisters) => (
+              <>
+                {displayRegisters.map((register) => (
+                  <SingleTask 
+                    key={register.id}
+                    task={register}
+                    onDeleteTask={deleteTask}
+                    onSumCompletedTasks={sumCompletedTasks}
+                  />
+                ))}
+              </>
+            )}
+          </Paginator>
+        </TasksList>
+        )}
   </Container>
   );
 };

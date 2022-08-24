@@ -1,13 +1,20 @@
 import { useState } from "react";
+import { Task } from "../../types/Task";
 import { Checkbox, ContentLabel, DeleteButton, IconTrash, ProjectCard, ProjectContainer, VerifyIcon } from "./styles";
 
 interface SingleTaskProps {
-  task: string;
-  onDeleteTask: (task: string, checked: boolean) => void;
+  children?: never;
+  task: Task;
+  onDeleteTask: (idTask: string, checked: boolean) => void;
   onSumCompletedTasks: (isToSum: boolean) => void;
 }
 
-const SingleTask: React.FC<SingleTaskProps> = ({ task, onDeleteTask, onSumCompletedTasks }) => {
+const SingleTask: React.FC<SingleTaskProps> = (
+  { 
+    task,
+    onDeleteTask,
+    onSumCompletedTasks
+  }) => {
 
   const [checked, setChecked] = useState(false);
   
@@ -20,7 +27,7 @@ const SingleTask: React.FC<SingleTaskProps> = ({ task, onDeleteTask, onSumComple
   };
 
   function handleDeleteTask() {
-    onDeleteTask(task, checked);
+    onDeleteTask(task.id, checked);
   };
 
   return (
@@ -36,7 +43,7 @@ const SingleTask: React.FC<SingleTaskProps> = ({ task, onDeleteTask, onSumComple
 
           <VerifyIcon $checked={checked} />
 
-          <span>{ task }</span> 
+          <span>{ task.content }</span> 
         </ContentLabel>
 
         <DeleteButton onClick={handleDeleteTask} title='Deletar'>
