@@ -86,7 +86,7 @@ const PageContent: React.FC = () => {
         </StatusTask>
       </TaskInformations>
 
-      {taskList.length === 0   
+      {taskListSize === 0   
         ? ( 
         <>
           <Line />
@@ -103,7 +103,7 @@ const PageContent: React.FC = () => {
         : (
         <TasksList>
           <Paginator
-            totalCountOfRegisters={taskList.length}
+            totalCountOfRegisters={taskListSize}
             registersPerPage={3}
             currentPage={page}
             onPageChange={setPage}
