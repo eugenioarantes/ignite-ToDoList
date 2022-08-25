@@ -1,12 +1,16 @@
 import { convertPixelToRem } from "css-blocks-styled-components";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+interface ButtonProps {
+  $isSpaceDot?: boolean;
+}
 
 export const Container = styled.div`
   float: right;
   margin-top: ${convertPixelToRem(30)};
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
   background: #9f9f9f;
   color: #000000;
   font-family: 'Inter';
@@ -37,5 +41,16 @@ export const Button = styled.button`
     background: #1e6f9f;
     color: white;
     cursor: default;
+  }
+
+  ${({ $isSpaceDot }) =>
+    ($isSpaceDot) &&
+      css`
+        &:disabled {
+          background: #9f9f9f;
+          color: #000000;
+          cursor: default;
+        }
+     `
   }
 `;

@@ -67,7 +67,7 @@ function Paginator<Task>({
             <>
               <PaginationItem onPageChange={onPageChange} number={1} />
               {(currentPage > (3 + siblingsCount)) && (
-                <span>...</span>
+                <Button disabled $isSpaceDot>...</Button>
                 )}
               {((currentPage - (siblingsCount + 1)) === 2) && (
                 <PaginationItem onPageChange={onPageChange} number={2} />
@@ -88,7 +88,7 @@ function Paginator<Task>({
           {currentPage + siblingsCount < lastPage && (
             <>
               {((currentPage + 2 + siblingsCount) < lastPage) && (
-                <span>...</span>
+                <Button disabled $isSpaceDot>...</Button>
               )}
               {((lastPage - (currentPage + siblingsCount)) === 2) && (
                 <PaginationItem onPageChange={onPageChange} number={lastPage - 1} />
