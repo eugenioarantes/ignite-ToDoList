@@ -11,8 +11,6 @@ const PageContent: React.FC = () => {
 
   const [taskList, setTaskList] = useState<Task[]>([]);
 
-  // const [word, setWord] = useState('');
-
   const [newTask, setNewTask] = useState('');
 
   const [completedTasks, setCompletedTasks] = useState(0);

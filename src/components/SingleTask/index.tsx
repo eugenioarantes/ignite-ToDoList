@@ -16,12 +16,13 @@ const SingleTask: React.FC<SingleTaskProps> = (
     onSumCompletedTasks
   }) => {
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(task.isAble);
   
   const handleChange = () => {
     const isChecked = !checked;
 
     setChecked(isChecked);
+    task.isAble = isChecked;
 
     ( isChecked ) ? onSumCompletedTasks(true) : onSumCompletedTasks(false);
   };
