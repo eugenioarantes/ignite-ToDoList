@@ -11,7 +11,7 @@ const PageContent: React.FC = () => {
 
   const [taskList, setTaskList] = useState<Task[]>([]);
 
-  const [newTask, setNewTask] = useState('');
+  const [newWord, setNewWord] = useState('');
 
   const [completedTasks, setCompletedTasks] = useState(0);
 
@@ -20,19 +20,19 @@ const PageContent: React.FC = () => {
   const taskListSize = taskList.length;
 
   const handleChangeTask = (word: string) => {
-    setNewTask(word);
+    setNewWord(word);
   };
 
   const handleCreateTask = () => {
     const createdTask = {
       id: uuid(),
-      content: newTask,
+      content: newWord,
       isAble: false,
     };
 
     setTaskList([...taskList, createdTask]);
 
-    setNewTask('');
+    setNewWord('');
   };
 
   function deleteTask (idOfTaskToDelete: string, wasChecked: boolean) {
@@ -57,7 +57,7 @@ const PageContent: React.FC = () => {
         <input 
           type="text" 
           placeholder="Adicione uma nova tarefa"
-          value={newTask}
+          value={newWord}
           onChange={(event) => handleChangeTask(event.target.value)}
         />
 
