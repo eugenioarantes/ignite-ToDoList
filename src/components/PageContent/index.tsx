@@ -35,14 +35,14 @@ const PageContent: React.FC = () => {
     setNewTask('');
   };
 
-  function deleteTask (idOfTaskToDelete: string, ischecked: boolean) {
+  function deleteTask (idOfTaskToDelete: string, wasChecked: boolean) {
     const tasksWithoutDeletedOne = taskList.filter(task => {
       return task.id !== idOfTaskToDelete;
     });
 
     setTaskList(tasksWithoutDeletedOne);
 
-    if (ischecked) {
+    if (wasChecked) {
       setCompletedTasks(completedTasks - 1);
     } 
   };
