@@ -6,7 +6,7 @@ To Do List Project
     <img alt="to-do-list" src="https://github.com/eugenioarantes/ignite-ToDoList/blob/master/public/logo.svg" />
 </h1>
 
-<br><br>
+<br>
 
 #### Home page
 
